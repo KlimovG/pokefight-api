@@ -1,22 +1,61 @@
 // const User = require("../models/User");
+// const { map } = require("../app");
 const pokemonDB = require("../pokefight.json");
+const pokeapiDB = require("../pokeapi.json");
+const findColor = require('../utilities/colors');
+const mergePokeData = require('../utilities/mergePokeData')
+const axios = require('axios');
 
 const list_pokemons = async (req, res) => {
   try {
     // const users = await User.find();
-    res.json(pokemonDB);
+    // Step 1: iterate over the pokemons array (any kind of loop)
+    // Step 2: for each pokemon, pass it to the findColor function
+    // Step 3: attach the returned value to your pokemon instance as a new property to the object
+
+    // Example 1: with a map
+    const pokemonsWithColors = pokemonDB.map(pk => {
+      const color = findColor(pk)
+      pk.color = color
+      return pk
+    })
+
+    const pokemonPromises = pokemonsWithColors.map(pk => mergePokeData(pk.id, pk))
+    // .slice(0, 20)
+
+    const mergedPokemonsData = await Promise.all(pokemonPromises)
+
+    res.json(mergedPokemonsData)
+    // res.json(pokemonsWithColors);
+
+  //  const newpokeDB = pokemonDB.map(async pokemon => {
+  //   const result= await axios.get(`https://pokeapi.co/api/v2/${pokemon.id}`)
+  //  return result
+  //  })
+  //  console.log(newpokeDB);
   } catch (e) {
     res.status(500).send(e);
-
   };
 }
+
 const one_pokemon = async (req, res) => {
   const { id } = req.params;
   try {
     const onePokemon = pokemonDB.find(pokemon => pokemon.id === +id);
-    res.json(onePokemon);
+
+    if(!onePokemon){
+      return res.sendStatus(404);
+    }
+
+    const color = findColor(onePokemon)
+    onePokemon.color = color;
+
+    const pokeData = await mergePokeData(id, onePokemon)
+
+    res.json(pokeData);
   } catch (e) {
-    res.status(500).send(e);
+    console.log(e.message)
+    res.status(500).send(e.message);
   }
 };
 
@@ -32,9 +71,8 @@ const pokemon_info = async (req, res) => {
   }
 };
 
-
 module.exports = {
   list_pokemons,
   one_pokemon,
-  pokemon_info
+  pokemon_info,
 };

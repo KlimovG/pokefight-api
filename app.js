@@ -1,9 +1,9 @@
-// require("dotenv").config();
-// require("./database/client");
+require("dotenv").config();
+require("./database/client");
 
 const express = require('express');
 const path = require('path');
-const cors = require('cors')
+const cors = require('cors');
 
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
