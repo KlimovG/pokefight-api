@@ -20,4 +20,4 @@ const mergePokeData = async (id, pokemon) => {
     }
 }
 
-module.exports = mergePokeData
+module.exports = mergePokeData;

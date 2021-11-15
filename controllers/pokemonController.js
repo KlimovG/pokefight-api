@@ -8,7 +8,6 @@ const axios = require('axios');
 
 const list_pokemons = async (req, res) => {
   try {
-    // const users = await User.find();
     // Step 1: iterate over the pokemons array (any kind of loop)
     // Step 2: for each pokemon, pass it to the findColor function
     // Step 3: attach the returned value to your pokemon instance as a new property to the object
@@ -20,7 +19,7 @@ const list_pokemons = async (req, res) => {
       return pk
     })
 
-    const pokemonPromises = pokemonsWithColors.map(pk => mergePokeData(pk.id, pk))
+    const pokemonPromises = pokemonsWithColors.slice(0,20).map(pk => mergePokeData(pk.id, pk))
     // .slice(0, 20)
 
     const mergedPokemonsData = await Promise.all(pokemonPromises)

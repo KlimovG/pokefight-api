@@ -12,7 +12,4 @@ pokemonRouter.get('/:id', one_pokemon);
 
 pokemonRouter.get('/:id/:info', pokemon_info);
 
-
-
-
 module.exports = pokemonRouter;
