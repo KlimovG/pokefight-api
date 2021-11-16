@@ -10,7 +10,7 @@ const {
   game
 } = require("../controllers/pokemonController")
 /* GET home page. */
-pokemonRouter.get('/', list_pokemons);
+pokemonRouter.get('/page/:id', list_pokemons);
 
 pokemonRouter.get('/:id', one_pokemon);
 

@@ -16,14 +16,17 @@ const list_pokemons = async (req, res) => {
     // Step 3: attach the returned value to your pokemon instance as a new property to the object
 
     // Example 1: with a map
-
     const pokemonsWithColors = pokemonDB.map(pk => {
       const color = findColor(pk)
       pk.color = color
       return pk
     })
 
-    const pokemonPromises = pokemonsWithColors.slice(0, 20).map(pk => mergePokeData(pk.id, pk))
+    const pageNumber = req.params.id;
+    const lastIndex = 20 * pageNumber;
+    const firstIndex = lastIndex - 20;
+
+    const pokemonPromises = pokemonsWithColors.slice(firstIndex, lastIndex).map(pk => mergePokeData(pk.id, pk))
     // .slice(0, 20)
 
     const mergedPokemonsData = await Promise.all(pokemonPromises)
