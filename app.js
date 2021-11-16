@@ -4,12 +4,12 @@ require("./database/client");
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+// const port = process.env.port || 3030 ;
 
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const pokemonRouter = require('./routes/pokemons');
-
 const app = express();
 
 // view engine setup
@@ -25,6 +25,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/pokemons', pokemonRouter);
 
-
+// app.listen (port,() => console.log(port));
 
 module.exports = app;

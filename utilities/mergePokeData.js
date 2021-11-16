@@ -13,12 +13,14 @@ const mergePokeData = async (id, pokemon) => {
         official: pokeApiData?.sprites?.other['official-artwork']?.front_default
       }
     }
-    console.log(mergedPokeData)
     return mergedPokeData
   } catch (e) {
     console.log(e.message)
     return pokemon
   }
+  console.log(mergedPokeData)
+  return mergedPokeData
 }
 
-module.exports = mergePokeData
+
+module.exports = mergePokeData;
