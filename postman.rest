@@ -2,7 +2,7 @@ GET http://localhost:3077/pokemons
 
 ###
 
-POST http://localhost:3077/pokemons/game/save
+POST http://localhost:3077/pokemons/game
 Content-Type: application/json
 
 {
@@ -14,4 +14,4 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3077/pokemons/game/leaderboard
+GET http://localhost:3077/pokemons/game

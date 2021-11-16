@@ -16,6 +16,7 @@ const list_pokemons = async (req, res) => {
     // Step 3: attach the returned value to your pokemon instance as a new property to the object
 
     // Example 1: with a map
+
     const pokemonsWithColors = pokemonDB.map(pk => {
       const color = findColor(pk)
       pk.color = color
@@ -43,6 +44,7 @@ const list_pokemons = async (req, res) => {
 
 const one_pokemon = async (req, res) => {
   const { id } = req.params;
+  // console.log("test huest")
   try {
     const onePokemon = pokemonDB.find(pokemon => pokemon.id === +id);
 
@@ -75,9 +77,9 @@ const pokemon_info = async (req, res) => {
 };
 
 const leaderboard = async (req, res) => {
-  console.log(req.id);
   try {
     const games = await Game.find();
+    console.log(games);
 
     res.json(games);
 
