@@ -7,9 +7,9 @@ const mergePokeData = async (id, pokemon) => {
         const mergedPokeData = {
           ...pokemon,
           pictures: {
-            back: pokeApiData?.sprites?.back_default, // null instead of breaking
+            // back: pokeApiData?.sprites?.back_default, // null instead of breaking
             front: pokeApiData?.sprites?.front_default,
-            dream: pokeApiData?.sprites?.other?.dream_world?.front_default,
+            // dream: pokeApiData?.sprites?.other?.dream_world?.front_default,
             official: pokeApiData?.sprites?.other['official-artwork']?.front_default
           }
         }
