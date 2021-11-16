@@ -20,19 +20,20 @@ const list_pokemons = async (req, res) => {
       return pk
     })
 
-    const pokemonPromises = pokemonsWithColors.map(pk => mergePokeData(pk.id, pk))
+    const pokemonPromises = pokemonsWithColors.slice(0, 20).map(pk => mergePokeData(pk.id, pk))
     // .slice(0, 20)
 
     const mergedPokemonsData = await Promise.all(pokemonPromises)
+    console.log(mergedPokemonsData)
 
     res.json(mergedPokemonsData)
     // res.json(pokemonsWithColors);
 
-  //  const newpokeDB = pokemonDB.map(async pokemon => {
-  //   const result= await axios.get(`https://pokeapi.co/api/v2/${pokemon.id}`)
-  //  return result
-  //  })
-  //  console.log(newpokeDB);
+    //  const newpokeDB = pokemonDB.map(async pokemon => {
+    //   const result= await axios.get(`https://pokeapi.co/api/v2/${pokemon.id}`)
+    //  return result
+    //  })
+    //  console.log(newpokeDB);
   } catch (e) {
     res.status(500).send(e);
   };
@@ -43,7 +44,7 @@ const one_pokemon = async (req, res) => {
   try {
     const onePokemon = pokemonDB.find(pokemon => pokemon.id === +id);
 
-    if(!onePokemon){
+    if (!onePokemon) {
       return res.sendStatus(404);
     }
 
