@@ -1,0 +1,17 @@
+GET http://localhost:3077/pokemons
+
+###
+
+POST http://localhost:3077/pokemons/game
+Content-Type: application/json
+
+{
+    "nameOfFighterOne" : "ab",
+    "nameOfFighterTwo" : "Georgi",
+    "winner": "ab",
+    "score": 10
+}
+
+###
+
+GET http://localhost:3077/pokemons/game
